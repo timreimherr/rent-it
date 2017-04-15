@@ -1,5 +1,6 @@
 ﻿using System;
 using Rent_It.Models;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,7 +26,7 @@ namespace Rent_It.Controllers
         public ActionResult Index()
         {
 
-            var customers = _context.Customers.ToList();
+            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
             return View(customers);
         }
 
