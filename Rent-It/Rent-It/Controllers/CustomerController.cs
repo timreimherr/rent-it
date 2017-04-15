@@ -32,7 +32,7 @@ namespace Rent_It.Controllers
 
         public ActionResult Details(int id)
         {
-            var customer = _context.Customers.SingleOrDefault(x => x.Id == id);
+            var customer = _context.Customers.Include(ctor => ctor.MembershipType).SingleOrDefault(x => x.Id == id);
             return View(customer);
         }
     }
