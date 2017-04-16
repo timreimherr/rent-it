@@ -239,11 +239,28 @@
     <Compile Include="Migrations\201704152323012_AddBirthdateToCustomer.Designer.cs">
       <DependentUpon>201704152323012_AddBirthdateToCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704152343285_AddItemTypeModel.cs" />
+    <Compile Include="Migrations\201704152343285_AddItemTypeModel.Designer.cs">
+      <DependentUpon>201704152343285_AddItemTypeModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704152353527_AddPropertiesToItemModel.cs" />
+    <Compile Include="Migrations\201704152353527_AddPropertiesToItemModel.Designer.cs">
+      <DependentUpon>201704152353527_AddPropertiesToItemModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704152355474_PopulateItemTypesTable.cs" />
+    <Compile Include="Migrations\201704152355474_PopulateItemTypesTable.Designer.cs">
+      <DependentUpon>201704152355474_PopulateItemTypesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704160336119_MadeItemPropertiesRequired.cs" />
+    <Compile Include="Migrations\201704160336119_MadeItemPropertiesRequired.Designer.cs">
+      <DependentUpon>201704160336119_MadeItemPropertiesRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\ItemType.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -354,6 +371,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704152323012_AddBirthdateToCustomer.resx">
       <DependentUpon>201704152323012_AddBirthdateToCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704152343285_AddItemTypeModel.resx">
+      <DependentUpon>201704152343285_AddItemTypeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704152353527_AddPropertiesToItemModel.resx">
+      <DependentUpon>201704152353527_AddPropertiesToItemModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704152355474_PopulateItemTypesTable.resx">
+      <DependentUpon>201704152355474_PopulateItemTypesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704160336119_MadeItemPropertiesRequired.resx">
+      <DependentUpon>201704160336119_MadeItemPropertiesRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
