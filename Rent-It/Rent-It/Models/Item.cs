@@ -9,17 +9,24 @@ namespace Rent_It.Models
     public class Item
     {
         public int Id { get; set; }
+
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
-        [Required]
+
         public ItemType ItemType { get; set; }
+
         [Required]
         public int ItemTypeId { get; set; }
 
-        [Required]
         public DateTime DateAdded { get; set; }
+
         [Required]
+        [Display(Name = "Number Available")]
         public int NumberAvailable { get; set; }
+
+        [Required]
+        [StringLength(500)]
+        public string Description { get; set; }
     }
 }
