@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rent_It.ViewModels;
 
 namespace Rent_It.Controllers
 {
@@ -36,6 +37,57 @@ namespace Rent_It.Controllers
             return View(item);
         }
 
+        public ActionResult ItemForm()
+        {
+            var itemTypes = _context.ItemTypes.ToList();
+            var viewModel = new ItemFormVM
+            {
+                ItemTypes = itemTypes
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(Item item)
+        {
+            if (item.Id == 0)
+            {
+                item.DateAdded = DateTime.Now;
+                _context.Items.Add(item);
+            }
+            else
+            {
+                var itemInDb = _context.Items.Single(x => x.Id == item.Id);
+
+                itemInDb.Name = item.Name;
+                itemInDb.Description = item.Description;
+                itemInDb.ItemTypeId = item.ItemTypeId;
+                itemInDb.NumberAvailable = item.NumberAvailable;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Item");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var item = _context.Items.SingleOrDefault(x => x.Id == id);
+
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+
+            var viewModel = new ItemFormVM
+            {
+                Item = item,
+                ItemTypes = _context.ItemTypes.ToList()
+            };
+
+            return View("ItemForm", viewModel);
+        }
 
     }
 }

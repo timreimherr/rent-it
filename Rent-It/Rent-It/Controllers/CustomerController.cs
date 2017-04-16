@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rent_It.ViewModels;
 
 namespace Rent_It.Controllers
 {
@@ -32,8 +33,57 @@ namespace Rent_It.Controllers
 
         public ActionResult Details(int id)
         {
-            var customer = _context.Customers.Include(ctor => ctor.MembershipType).SingleOrDefault(x => x.Id == id);
+            var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(x => x.Id == id);
             return View(customer);
+        }
+
+        public ActionResult CustomerForm()
+        {
+            var membershipTypes = _context.MembershipTypes.ToList();
+            var viewModel = new CustomerFormVM
+            {
+                MembershipTypes = membershipTypes
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(Customer newCustomer)
+        {
+            if(newCustomer.Id == 0)
+            _context.Customers.Add(newCustomer);
+            else
+            {
+                var customerInDb = _context.Customers.Single(c => c.Id == newCustomer.Id);
+
+                customerInDb.Name = newCustomer.Name;
+                customerInDb.Birthdate = newCustomer.Birthdate;
+                customerInDb.MembershipTypeId = newCustomer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsLetter = newCustomer.IsSubscribedToNewsLetter;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Customer");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(x => x.Id == id);
+
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            var viewModel = new CustomerFormVM
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+
+            return View("CustomerForm", viewModel);
         }
     }
 }

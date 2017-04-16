@@ -1,0 +1,39 @@
+﻿@model Rent_It.ViewModels.ItemFormVM
+@{
+    ViewBag.Title = "ItemForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.Item == null)
+{
+    <h2>New Item</h2>
+}
+else
+{
+    <h2>Edit Item</h2>
+}
+
+@using (Html.BeginForm("Save", "Item"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Item.Name)
+        @Html.TextBoxFor(m => m.Item.Name, new { @class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Item.ItemTypeId)
+        @Html.DropDownListFor(m => m.Item.ItemTypeId, new SelectList(Model.ItemTypes, "Id", "Name"), "Select Item Type", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Item.Description)
+        @Html.TextAreaFor(m => m.Item.Description, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Item.NumberAvailable)
+        @Html.TextBoxFor(m => m.Item.NumberAvailable, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m => m.Item.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+
+
+}
+
+
