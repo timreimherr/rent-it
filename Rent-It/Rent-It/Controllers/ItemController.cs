@@ -49,8 +49,20 @@ namespace Rent_It.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Item item)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new ItemFormVM
+                {
+                    Item = item,
+                    ItemTypes = _context.ItemTypes.ToList()
+                };
+
+                return View("ItemForm", viewModel);
+            }
+
             if (item.Id == 0)
             {
                 item.DateAdded = DateTime.Now;

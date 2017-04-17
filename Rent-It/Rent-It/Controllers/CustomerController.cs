@@ -42,6 +42,7 @@ namespace Rent_It.Controllers
             var membershipTypes = _context.MembershipTypes.ToList();
             var viewModel = new CustomerFormVM
             {
+                Customer = new Customer(),
                 MembershipTypes = membershipTypes
             };
 
@@ -49,10 +50,25 @@ namespace Rent_It.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer newCustomer)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CustomerFormVM
+                {
+                    Customer = newCustomer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+
+                return View("CustomerForm", viewModel);
+            }
+
             if(newCustomer.Id == 0)
-            _context.Customers.Add(newCustomer);
+            {
+                _context.Customers.Add(newCustomer);
+
+            }
             else
             {
                 var customerInDb = _context.Customers.Single(c => c.Id == newCustomer.Id);
