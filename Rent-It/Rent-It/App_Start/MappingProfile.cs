@@ -14,6 +14,8 @@ namespace Rent_It.App_Start
         {
             Mapper.CreateMap<Customer, CustomerDto>();
             Mapper.CreateMap<CustomerDto, Customer>();
+            Mapper.CreateMap<Item, ItemDto>();
+            Mapper.CreateMap<ItemDto, Item>();
         }
     }
 }
