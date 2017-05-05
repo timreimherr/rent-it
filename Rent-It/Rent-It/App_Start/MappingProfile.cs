@@ -12,10 +12,16 @@ namespace Rent_It.App_Start
     {
         public MappingProfile()
         {
+            // Domain to Dto
             Mapper.CreateMap<Customer, CustomerDto>();
-            Mapper.CreateMap<CustomerDto, Customer>();
             Mapper.CreateMap<Item, ItemDto>();
-            Mapper.CreateMap<ItemDto, Item>();
+
+            // Dto to Domain
+            Mapper.CreateMap<CustomerDto, Customer>()
+                .ForMember(c => c.Id, opt => opt.Ignore());
+
+            Mapper.CreateMap<ItemDto, Item>()
+                .ForMember(i => i.Id, opt => opt.Ignore());
         }
     }
 }
