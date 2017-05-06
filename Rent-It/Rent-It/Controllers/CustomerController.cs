@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Rent_It.ViewModels;
+using System.Data.Entity.Validation;
 
 namespace Rent_It.Controllers
 {
@@ -51,7 +52,7 @@ namespace Rent_It.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(Customer newCustomer)
+        public ActionResult Save(Customer customer)
         {
             if (!ModelState.IsValid)
             {
@@ -64,22 +65,26 @@ namespace Rent_It.Controllers
                 return View("CustomerForm", viewModel);
             }
 
-            if(newCustomer.Id == 0)
-            {
-                _context.Customers.Add(newCustomer);
-
-            }
+            if(customer.Id == 0)
+                _context.Customers.Add(customer);
             else
             {
-                var customerInDb = _context.Customers.Single(c => c.Id == newCustomer.Id);
+                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
 
-                customerInDb.Name = newCustomer.Name;
-                customerInDb.Birthdate = newCustomer.Birthdate;
-                customerInDb.MembershipTypeId = newCustomer.MembershipTypeId;
-                customerInDb.IsSubscribedToNewsLetter = newCustomer.IsSubscribedToNewsLetter;
+                customerInDb.Name = customer.Name;
+                customerInDb.Birthdate = customer.Birthdate;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
             }
 
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                Console.WriteLine(e);
+            }
 
             return RedirectToAction("Index", "Customer");
         }
