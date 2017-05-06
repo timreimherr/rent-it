@@ -16,5 +16,7 @@ namespace Rent_It.Dtos
 
         public byte MembershipTypeId { get; set; }
 
+        public MembershipTypeDto MembershipType { get; set; }
+
     }
 }
