@@ -17,23 +17,31 @@ else
     <div class="form-group">
         @Html.LabelFor(m => m.Item.Name)
         @Html.TextBoxFor(m => m.Item.Name, new { @class="form-control"})
+        @Html.ValidationMessageFor(m => m.Item.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Item.ItemTypeId)
         @Html.DropDownListFor(m => m.Item.ItemTypeId, new SelectList(Model.ItemTypes, "Id", "Name"), "Select Item Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Item.ItemTypeId)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Item.Description)
         @Html.TextAreaFor(m => m.Item.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Item.ItemTypeId)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Item.NumberAvailable)
         @Html.TextBoxFor(m => m.Item.NumberAvailable, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Item.Description)
     </div>
     @Html.HiddenFor(m => m.Item.Id)
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
 
 
 }
 
-
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
