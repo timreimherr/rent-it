@@ -58,7 +58,7 @@ namespace Rent_It.Controllers
             {
                 var viewModel = new CustomerFormVM
                 {
-                    Customer = newCustomer,
+                    Customer = customer,
                     MembershipTypes = _context.MembershipTypes.ToList()
                 };
 
