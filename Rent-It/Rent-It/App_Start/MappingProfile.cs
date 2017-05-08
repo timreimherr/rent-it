@@ -15,6 +15,8 @@ namespace Rent_It.App_Start
             // Domain to Dto
             Mapper.CreateMap<Customer, CustomerDto>();
             Mapper.CreateMap<Item, ItemDto>();
+            Mapper.CreateMap<MembershipType, MembershipTypeDto>();
+
 
             // Dto to Domain
             Mapper.CreateMap<CustomerDto, Customer>()

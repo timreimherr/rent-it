@@ -27,9 +27,8 @@ namespace Rent_It.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-
-            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
-            return View(customers);
+            // The datatable will load the customers from the customer api in the Customer Index view
+            return View();
         }
 
         public ActionResult Details(int id)
@@ -58,7 +57,7 @@ namespace Rent_It.Controllers
             {
                 var viewModel = new CustomerFormVM
                 {
-                    Customer = newCustomer,
+                    Customer = customer,
                     MembershipTypes = _context.MembershipTypes.ToList()
                 };
 
